@@ -1,33 +1,15 @@
-const express = require('express');
+'use strict';
+
+const express   = require('express');
+const cors      = require('cors');
+
+require('./src/config/env');
+require('./src/models/index.js');
+
 const app = express();
-const dotenv = require('dotenv').config();
+app.use(cors())
+app.use(express.json())
 
-const db = require('./config/db');
-const user = require('./controller/user')
-
-const bodyparser = require('body-parser')
-
-const SERVERPORT = process.env.SERVER_PORT;
-
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded({extended:false}))
-
-db.connect((err)=>{
-    if(err) throw err;
-    else console.log('db open!');
-})
-
-app.post('/',(req,res)=>{
-    const  username = req.body.username;
-    user.findUser(username).then((values)=>{
-        res.send(values)
-    })
-    .catch((values)=>{
-        res.send(values)
-    })
-})
-
-app.listen(SERVERPORT, ()=>{
-    console.log("Start")  
-
-})
+app.listen(process.env.SERVER_PORT, ()=>{
+    console.log("서버 시작");
+});
