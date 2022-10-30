@@ -1,0 +1,4 @@
+로그포제이로 로그 찍히게하기 하버 컷하고
+dto로 datasetter역할
+프로퍼티 -> yml로바꾸고
+하버네이트 ddl옵션 create 말고 invalid로 바꾸기
