@@ -1,4 +1,5 @@
-const dbConfig = require('../config/mysql.js')[process.env.NODE_ENV];
+const dbConfig = require('@/config/mysql')[process.env.NODE_ENV];
+
 const { Sequelize } = require('sequelize');
 
 const sequalize = new Sequelize(
