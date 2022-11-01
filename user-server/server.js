@@ -1,5 +1,6 @@
 'use strict';
 
+// '@'로 경로명을 'src'에서 시작할 수 있도록...
 require('module-alias/register')
 
 require('@/config/env');

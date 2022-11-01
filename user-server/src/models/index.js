@@ -16,6 +16,6 @@ const db = {};
 db.sequelizeClass = Sequelize;
 db.sequelize = sequalize;
 
-db.members = require('./member.js')(sequalize, Sequelize);
+db.member = require('./member.js')(sequalize, Sequelize);
 
 module.exports = db;
