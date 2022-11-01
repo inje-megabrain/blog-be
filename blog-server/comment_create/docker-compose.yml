@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+        mysql:
+                image: library/mysql:5.7
+                environment:
+                        - MYSQL_DATABASE=testdb
+                        - MYSQL_ROOT_HOST=%
+                        - MYSQL_ROOT_PASSWORD=test123
+                        - TZ= Asia/Seoul
+                ports:
+                        - 13306:3306
+        #volumes:
+               #- ./db_datas:/var/lib/mysql
+        application:
+                build: .
+                restart: always
+                ports:
+                        - 13307:8080
+                depends_on:
+                        - mysql
+                environment:
+                        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/testdb?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+                        SPRING_DATASOURCE_USERNAME: root
+                        SPRING_DATASOURCE_PASSWORD: test123
+
+#volumes:
+        #db_datas:
