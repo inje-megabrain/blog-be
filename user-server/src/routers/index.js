@@ -2,13 +2,13 @@
 
 const { Router } = require('express');
 
+const v1 = require('@api/v1');
+
 const router = Router();
 
-const UserService = require('@/services/UserService');
-
-// API 진입점
-router.get('/', (req, res) => {
-	return res.send("<h1>Welcome to Api!</h1>");
-});
+/**
+ * 실제 routing 진입점은 api/v1/ 참조
+ */
+router.use(v1);
 
 module.exports = router;

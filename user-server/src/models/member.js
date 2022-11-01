@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = (sequalize, sequalizeClass) => {
     const members = sequalize.define("member", {
         id: {
@@ -23,7 +25,9 @@ module.exports = (sequalize, sequalizeClass) => {
             allowNull: false
         },
     }, {
+        // 자동으로 createdAt, editedAt 필드를 생성하지 않음
         timestamps: false,
+        // 자동으로 필드명 끝에 's'를 붙이지 않음
         freezeTableName: true
     });
 	return members;
