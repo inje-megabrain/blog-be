@@ -4,7 +4,7 @@ const db = require('@/models/index');
 
 class UserService {
   static async viewAll() {
-    return db.members.findAll();
+    return await db.members.findAll();
   }
 }
 

@@ -21,7 +21,10 @@ module.exports = (sequalize, sequalizeClass) => {
             field: "password",
             type: sequalizeClass.STRING(255),
             allowNull: false
-        }
+        },
+    }, {
+        timestamps: false,
+        freezeTableName: true
     });
 	return members;
 }
