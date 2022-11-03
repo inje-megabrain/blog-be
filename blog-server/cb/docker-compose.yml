@@ -4,9 +4,9 @@ services:
         mysql:
                 image: library/mysql:5.7
                 environment:
-                        - MYSQL_DATABASE=디비이름
+                        - MYSQL_DATABASE=testdb
                         - MYSQL_ROOT_HOST=%
-                        - MYSQL_ROOT_PASSWORD=디비비번
+                        - MYSQL_ROOT_PASSWORD=test123
                         - TZ= Asia/Seoul
                 ports:
                         - 13306:3306
@@ -20,7 +20,7 @@ services:
                 depends_on:
                         - mysql
                 environment:
-                        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/디비이름?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+                        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/testdb?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
                         SPRING_DATASOURCE_USERNAME: root
                         SPRING_DATASOURCE_PASSWORD: test123
 

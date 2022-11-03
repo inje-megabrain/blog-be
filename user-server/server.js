@@ -1,21 +1,33 @@
-'use strict';
+const express = require('express');
+const app = express();
+const dotenv = require('dotenv').config();
 
-// '@'로 경로명을 'src'에서 시작할 수 있도록...
-require('module-alias/register')
+const db = require('./config/db');
+const user = require('./controller/user')
 
-require('@/config/env');
-const db = require('@/models/index');
-const app = require('@/app')
+const bodyparser = require('body-parser')
 
-db.sequelize.authenticate()
-.then(() => {
-  console.log("DB 연결 성공");
+const SERVERPORT = process.env.SERVER_PORT;
+
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({extended:false}))
+
+db.connect((err)=>{
+    if(err) throw err;
+    else console.log('db open!');
 })
-.catch((err) => {
-  console.log("DB 연결 실패...");
-  console.log(err);
+
+app.post('/',(req,res)=>{
+    const  username = req.body.username;
+    user.findUser(username).then((values)=>{
+        res.send(values)
+    })
+    .catch((values)=>{
+        res.send(values)
+    })
 })
 
-app.listen(process.env.SERVER_PORT, ()=>{
-  console.log("서버 시작");
-});
+app.listen(SERVERPORT, ()=>{
+    console.log("Start")  
+
+})

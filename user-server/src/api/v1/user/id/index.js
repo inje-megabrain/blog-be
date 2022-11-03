@@ -8,8 +8,8 @@ const router = Router();
 
 // ID 찾기
 router.get('/', async (req, res) => {
-  let id = req.body.email;
-  let pw = req.body.user;
+  let email = req.body.email;
+  let user = req.body.user;
   let result = await UserService.findId(email, user);
 	return res.send(result);
 });
