@@ -19,15 +19,12 @@ class UserService {
   }
 
   /**
-   * 회원 가입합니다.
-   * @param {string} id 
-   * @param {string | null} email?
-   * @param {string | null} name?
-   * @param {string} password 
+   * 회원가입 합니다.
+   * @param {User} newUser 신규 회원 정보가 포함된 User 객체
    * @returns {Promise<boolean>} 성공 여부
    * @todo
    */
-  static async signup(id, email, name, password) {
+  static async signup(newUser) {
     throw new Error("구현되지 않았습니다.");
   }
 
@@ -44,9 +41,10 @@ class UserService {
   /**
    * 비밀번호를 변경합니다.
    * @param {string} id 
+   * @param {string} newPassword
    * @returns 
    */
-  static async changePassword(id) {
+  static async changePassword(id, newPassword) {
     throw new Error("구현되지 않았습니다.");
   }
 

@@ -22,6 +22,6 @@ db.sequelize = sequalize;
   schema를 추가하려면 models/ 아래에 추가 후 (예: member.js)
   아래와 같이 require로 가져와 함수를 호출
 */
-db.member = require('./member.js')(sequalize, Sequelize);
+db.member = require('./user.js').defineSequalize(sequalize, Sequelize);
 
 module.exports = db;

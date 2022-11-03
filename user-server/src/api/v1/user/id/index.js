@@ -6,10 +6,11 @@ const UserService = require('@/services/UserService');
 
 const router = Router();
 
-router.post('/', async (req, res) => {
-  let id = req.body.id;
-  let pw = req.body.password;
-  let result = await UserService.login(id, pw);
+// ID 찾기
+router.get('/', async (req, res) => {
+  let id = req.body.email;
+  let pw = req.body.user;
+  let result = await UserService.findId(email, user);
 	return res.send(result);
 });
 
