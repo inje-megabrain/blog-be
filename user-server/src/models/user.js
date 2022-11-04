@@ -24,9 +24,9 @@ class UserDTO {
    * @param {User} user DTO를 만들 User 객체
    */
   constructor(user) {
-    this.id = id;
-    this.email = email;
-    this.password = password;
+    this.id = user.id;
+    this.email = user.email;
+    this.password = user.password;
   }
 }
 
