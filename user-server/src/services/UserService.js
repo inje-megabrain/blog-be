@@ -81,15 +81,6 @@ class UserService {
   static async changeInfo(id) {
     throw new Error("구현되지 않았습니다.");
   }
-
-  /**
-   * 비밀번호를 변경합니다.
-   * @param {string} id
-   * @param {string} newPw 새 비밀번호
-   */
-  static async changePassword(id, newPw) {
-    throw new Error("구현되지 않았습니다.");
-  }
 }
 
 module.exports = UserService;
