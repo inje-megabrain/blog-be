@@ -1,6 +1,6 @@
 'use strict';
 
-const sequalizeObject = require('@/config/sequalize');
+const sequelize = require('@/middleware/sequelize');
 
 const { DataTypes, Model } = require('sequelize')
 
@@ -30,7 +30,7 @@ UserModel.init({
       allowNull: false
   },
 }, {
-  sequalizeObject,
+  sequelize,
   modelName: "member",
   // 자동으로 createdAt, editedAt 필드를 생성하지 않음
   timestamps: false,

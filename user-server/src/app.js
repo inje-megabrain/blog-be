@@ -3,7 +3,7 @@
 const express   = require('express');
 const cors      = require('cors');
 
-const routers = require('@/routers/index');
+const routers = require('@/api/v1/index');
 const app = express();
 
 app.use(cors())

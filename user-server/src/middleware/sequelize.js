@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 
 const dbConfig = require('@/config/mysql')[process.env.NODE_ENV];
 
-const sequalizeObject = new Sequelize(
+const sequelize = new Sequelize(
     dbConfig.database,
     dbConfig.username,
     dbConfig.password,
@@ -14,4 +14,4 @@ const sequalizeObject = new Sequelize(
     }
 );
 
-module.exports = sequalizeObject;
+module.exports = sequelize;

@@ -4,7 +4,7 @@
 require('module-alias/register')
 
 require('@/config/env');
-const db = require('@/config/sequalize');
+const db = require('@/middleware/sequelize');
 const app = require('@/app')
 
 db.sequelize.authenticate()
