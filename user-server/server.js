@@ -4,10 +4,10 @@
 require('module-alias/register')
 
 require('@/config/env');
-const db = require('@/middleware/sequelize');
+const sequelize = require('@/middleware/sequelize');
 const app = require('@/app')
 
-db.sequelize.authenticate()
+sequelize.authenticate()
 .then(() => {
   console.log("DB 연결 성공");
 })

@@ -15,7 +15,7 @@ class UserService {
    * @todo 비밀번호 암호화
    */
   static async login(id, rawPw) {
-    return await UserModel.findOne({where: {id: id, pw: rawPw}});
+    return await UserModel.findOne({where: {id: id, password: rawPw}});
   }
 
   /**
@@ -62,7 +62,7 @@ class UserService {
    * @returns {Promise<Array<UserModel>>} 유저 DTO 배열
    */
   static async findAll() {
-    return await UserModel.findAll()
+    return await UserModel.findAll();
   }
 
   /**

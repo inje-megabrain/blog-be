@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
 	return res.send("<h1>Welcome to Api!</h1>");
 });
 
-router.get('/test', (req, res) => {
-  return res.send(UserService.findAll());
+router.get('/test', async (req, res) => {
+  return res.send(await UserService.login('test', 'test123'));
 })
 
 router.use('/login', loginRouter);
