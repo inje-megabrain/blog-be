@@ -3,8 +3,7 @@
 const passport = require("passport");
 const { Strategy } = require("passport-local");
 
-const db = require("@/config/sequalize");
-const { UserModel } = require("@/models/user");
+const UserService = require('@/services/UserService');
 
 passport.use('local-login', new Strategy(
   {
@@ -14,7 +13,10 @@ passport.use('local-login', new Strategy(
   },
   async (req, id, password, done) => {
     try {
-        let user = db.Member.findByPk<UserModel>()
+        let user = UserService.findBy
+
+        if (!user)
+          return done(null, false);
     }
     catch (error) {
       console.log(error);

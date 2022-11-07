@@ -1,6 +1,6 @@
 'use strict';
 
-const db = require('@/config/sequalize');
+const { UserModel } = require('@/models/user');
 
 /**
  * 유저와 관련된 서비스를 처리하는 클래스.
@@ -8,14 +8,14 @@ const db = require('@/config/sequalize');
  */
 class UserService {
   /**
-   * 로그인 토큰을 발급합니다.
+   * 로그인이 유효한지 확인합니다.
    * @param {string} id 아이디
-   * @param {string} pw 비밀번호(raw)
-   * @returns {Promise<{token: string, session_id: string}>} 토큰
-   * @todo
+   * @param {string} rawPw 비밀번호
+   * @returns {Promise<UserModel|null>} 찾은 UserModel 또는 null
+   * @todo 비밀번호 암호화
    */
-  static async login(id, pw) {
-    throw new Error("구현되지 않았습니다.");
+  static async login(id, rawPw) {
+    return await UserModel.findOne({where: {id: id, pw: rawPw}});
   }
 
   /**
@@ -59,10 +59,10 @@ class UserService {
 
   /**
    * 사용자 전체를 조회합니다.
-   * @returns {Promise<{id: string, name: string, email: string}[]>} 유저 DTO 배열
+   * @returns {Promise<Array<UserModel>>} 유저 DTO 배열
    */
   static async findAll() {
-    throw new Error("구현되지 않았습니다.");
+    return await UserModel.findAll()
   }
 
   /**
