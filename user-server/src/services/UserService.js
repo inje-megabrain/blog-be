@@ -1,6 +1,6 @@
 'use strict';
 
-const db = require('@/models/index');
+const db = require('@/config/sequalize');
 
 /**
  * 유저와 관련된 서비스를 처리하는 클래스.
