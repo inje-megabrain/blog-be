@@ -20,7 +20,7 @@ class UserService {
 
   /**
    * 회원가입 합니다.
-   * @param {User} newUser 신규 회원 정보가 포함된 User 객체
+   * @param {{id: string, email: string, name: string, password: string}} newUser 신규 회원 정보가 포함된 User 객체
    * @returns {Promise<boolean>} 성공 여부
    * @todo
    */
@@ -68,9 +68,10 @@ class UserService {
   /**
    * 사용자 정보를 가져옵니다.
    * @param {string} id
+   * @returns {Promise<UserModel>}
    */
   static async getInfo(id) {
-    throw new Error("구현되지 않았습니다.");
+    return await UserModel.findByPk(id);
   }
 
   /**
