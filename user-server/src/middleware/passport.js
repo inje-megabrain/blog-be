@@ -1,6 +1,5 @@
 'use strict';
 
-require("express-session");
 const passport = require("passport");
 const { Strategy } = require("passport-local");
 
