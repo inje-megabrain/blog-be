@@ -6,13 +6,13 @@ const passport = require('passport');
 const router = Router();
 
 router.post('/', async (req, res, next) => {
-  passport.authenticate('local', (error, user, info) => {
+  passport.authenticate('local', (error, user) => {
     if (error) {
       console.error(error);
       return next(error);
     }
     if (!user) {
-      return res.redirect(`/?loginError=${info.message}`);
+      return res.status(400);
     }
 
     req.login(user, (error) => {
