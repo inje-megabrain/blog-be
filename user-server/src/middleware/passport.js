@@ -2,6 +2,7 @@
 
 const passport = require("passport");
 const { Strategy: LocalStrategy } = require("passport-local");
+const { Strategy: JWTStrategy, ExtractJwt } = require("passport-jwt");
 
 const UserService = require('@/services/UserService');
 
@@ -14,14 +15,36 @@ passport.use('local', new LocalStrategy(
   async (req, id, password, done) => {
     try {
       let user = await UserService.login(id, password);
-      if (!user)
+      if (!user) {
         return done(null, false, {
           message: "Invalid ID or Password!"
         });
-      return done(null, {id, password});
+      }
+      return done(null, user);
     }
     catch (error) {
-      console.log(error);
+      console.error(error);
+    }
+  }
+));
+
+passport.use('jwt', new JWTStrategy(
+  {
+    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    secretOrKey: 'jwt-secret-key'
+  },
+  async (jwtPayload, done) => {
+    try {
+      let user = await UserService.getInfo(jwtPayload.id);
+      if (!user) {
+        return done(null, false, {
+          message: "Invalid Authorization!"
+        });
+      }
+      return done(null, user);
+    }
+    catch (error) {
+      console.error(error);
     }
   }
 ));
