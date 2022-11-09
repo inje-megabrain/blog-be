@@ -7,11 +7,7 @@ const router = Router();
 
 router.post('/', async (req, res, next) => {
   passport.authenticate('local', (error, user) => {
-    if (error) {
-      console.error(error);
-      return next(error);
-    }
-    if (!user) {
+    if (error || !user) {
       return res.status(400);
     }
 
