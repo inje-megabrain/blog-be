@@ -31,7 +31,7 @@ passport.use('local', new LocalStrategy(
 passport.use('jwt', new JWTStrategy(
   {
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-    secretOrKey: 'jwt-secret-key'
+    secretOrKey: process.env.JWT_SECRET_KEY
   },
   async (jwtPayload, done) => {
     try {
