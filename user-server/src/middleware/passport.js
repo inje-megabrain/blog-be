@@ -15,7 +15,9 @@ passport.use('local-login', new Strategy(
     try {
         let user = UserService.login(id, password);
         if (!user)
-          return done(null, false);
+          return done(null, false, {
+            message: "Invalid ID or Password!"
+          });
         return done(null, {id, password});
     }
     catch (error) {

@@ -1,16 +1,29 @@
 'use strict';
 
 const { Router } = require('express');
-
-const UserService = require('@/services/UserService');
+const passport = require('passport');
 
 const router = Router();
 
-router.post('/', async (req, res) => {
-  let id = req.body.id;
-  let pw = req.body.password;
-  let result = await UserService.login(id, pw);
-	return res.send(result);
+router.post('/', async (req, res, next) => {
+  passport.authenticate('local', (error, user, info) => {
+    if (error) {
+      console.error(error);
+      return next(error);
+    }
+    if (!user) {
+      return res.redirect(`/?loginError=${info.message}`);
+    }
+
+    req.login(user, (error) => {
+      if (error) {
+        console.error(error);
+        return next(error);
+      }
+    })
+
+    return res.redirect('/');
+  })(req, res, next);
 });
 
 module.exports = router;

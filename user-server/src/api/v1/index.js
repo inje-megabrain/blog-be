@@ -2,9 +2,10 @@
 
 const UserService = require('@/services/UserService');
 const { Router } = require('express');
-const loginRouter = require('./login');
-const signupRouter = require('./signup');
-const userRouter = require('./user');
+const loginRouter = require('./login/index');
+const logoutRouter = require('./logout/index');
+const signupRouter = require('./signup/index');
+const userRouter = require('./user/index');
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.get('/test', async (req, res) => {
 })
 
 router.use('/login', loginRouter);
+router.use('/logout', logoutRouter);
 router.use('/signup', signupRouter);
 router.use('/user', userRouter);
 
