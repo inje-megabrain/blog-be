@@ -1,6 +1,5 @@
 'use strict';
 
-const UserService = require('@/services/UserService');
 const { Router } = require('express');
 const loginRouter = require('./login/index');
 const logoutRouter = require('./logout/index');
