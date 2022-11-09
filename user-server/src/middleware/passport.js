@@ -1,11 +1,11 @@
 'use strict';
 
 const passport = require("passport");
-const { Strategy } = require("passport-local");
+const { Strategy: LocalStrategy } = require("passport-local");
 
 const UserService = require('@/services/UserService');
 
-passport.use('local-login', new Strategy(
+passport.use('local', new LocalStrategy(
   {
     usernameField: 'id',
     passwordField: 'password',
@@ -13,12 +13,12 @@ passport.use('local-login', new Strategy(
   },
   async (req, id, password, done) => {
     try {
-        let user = UserService.login(id, password);
-        if (!user)
-          return done(null, false, {
-            message: "Invalid ID or Password!"
-          });
-        return done(null, {id, password});
+      let user = await UserService.login(id, password);
+      if (!user)
+        return done(null, false, {
+          message: "Invalid ID or Password!"
+        });
+      return done(null, {id, password});
     }
     catch (error) {
       console.log(error);
@@ -30,8 +30,8 @@ passport.serializeUser((id, done) => {
   return done(null, id);
 })
 
-passport.deserializeUser((id, done) => {
-  let user = UserService.getInfo(id);
+passport.deserializeUser(async (id, done) => {
+  let user = await UserService.getInfo(id);
 
   if (user)
     done(null, user);

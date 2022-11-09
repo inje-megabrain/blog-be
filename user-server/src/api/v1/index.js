@@ -13,9 +13,9 @@ router.get('/', (req, res) => {
 	return res.send("<h1>Welcome to Api!</h1>");
 });
 
-router.use('/login', loginRouter);
-router.use('/logout', logoutRouter);
-router.use('/signup', signupRouter);
-router.use('/user', userRouter);
+router.use('/api/v1/login', loginRouter);
+router.use('/api/v1/logout', logoutRouter);
+router.use('/api/v1/signup', signupRouter);
+router.use('/api/v1/user', userRouter);
 
 module.exports = router;
