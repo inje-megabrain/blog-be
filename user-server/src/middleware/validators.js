@@ -1,6 +1,6 @@
 'use strict';
 
-const {body, param, query, validationResult} = require("express-validator");
+const {body, query, validationResult} = require("express-validator");
 
 const handleInvalidReq = (req, res, next) => {
   let errors = validationResult(req);

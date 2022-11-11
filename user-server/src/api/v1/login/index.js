@@ -4,9 +4,11 @@ const { Router } = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
+const validators = require('@/middleware/validators');
+
 const router = Router();
 
-router.post('/', async (req, res) => {
+router.post('/', ...validators.login, async (req, res) => {
   passport.authenticate('local', (error, user, info) => {
     if (error || !user) {
       return res.status(400).json({reason: info.message});
