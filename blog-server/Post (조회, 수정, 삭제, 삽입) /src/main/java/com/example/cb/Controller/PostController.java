@@ -18,43 +18,18 @@ public class PostController {
     PostService postService;
 
     @GetMapping("/search/{postAuthor}") //조회 기능
-    public List<Post> search(@PathVariable String postAuthor, HttpServletResponse response){
-        try{
-            List <Post> post = postService.search(postAuthor);
-            if(!post.isEmpty()) { response.setStatus(HttpServletResponse.SC_OK);
-                return post;
-            }
-            else { response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                return null;
-            }
-        }
-        catch(Exception e){ response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return null;
-        }
+    public int search(@PathVariable String postAuthor, HttpServletResponse response){
+        return postService.search(postAuthor);
     }
 
     @PostMapping("/create") //삽입 & 수정 기능
     public Post create(@ModelAttribute PostDto postDto, HttpServletResponse response){
         //postService.update(postDto);
-        try{
-            Optional <Post> post  = Optional.ofNullable(postService.save(postDto));
-            if(post.isPresent()){response.setStatus(HttpServletResponse.SC_OK);
-                return post.get();
-            }
-            else { response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                return null;
-            }
-        }catch (Exception e){ response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return null;
-        }
+        Optional <Post> post  = Optional.ofNullable(postService.save(postDto));
+        return post.get();
     }
     @GetMapping("/delete/{postAuthor}") //삭제 기능
-    public void delete(@PathVariable String postAuthor, HttpServletResponse response){
-        try{
-            if(postService.delete(postAuthor)) response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }
-        catch (Exception e){
-            response.setStatus(HttpServletResponse.SC_OK);
-        }
+    public String delete(@PathVariable String postAuthor, HttpServletResponse response){
+        return postService.delete(postAuthor);
     }
 }

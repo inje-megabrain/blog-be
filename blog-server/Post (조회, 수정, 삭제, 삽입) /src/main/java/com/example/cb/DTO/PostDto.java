@@ -23,7 +23,6 @@ public class PostDto { //뷰에서 받는 데이터들
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postCreateAt;  //Date를 쓸 거면 DateTimeForamt을 해줘야 쓸 수 있다.
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postEditAt;
     private String postTemporary;
     private String postImage;

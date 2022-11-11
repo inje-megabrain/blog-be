@@ -14,4 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Transactional  //Delete하려면 필요한 Annotation
     void deleteBypostAuthor(String postAuthor); //pustAuthor->작가를 delete하는 ㅔㅁ소드 구현
+
+    Post findPost(Long postId);
 }
+
