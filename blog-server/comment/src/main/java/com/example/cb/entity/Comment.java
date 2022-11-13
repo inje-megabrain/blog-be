@@ -54,6 +54,19 @@ public class Comment {
         likes =commentDto.getLikes();
         parent = commentDto.getParent();
     }
+
+    public Comment(Long id, String postid, String author, String content, Date lastEditedAt, Date createdAt, Boolean isSecret, Long likes, Long parent) {
+        this.id = id;
+        this.postid = postid;
+        this.author = author;
+        this.content = content;
+        this.lastEditedAt = lastEditedAt;
+        this.createdAt = createdAt;
+        this.isSecret = isSecret;
+        this.likes = likes;
+        this.parent = parent;
+    }
+
     public static Comment Commentfrom(CommentDto dto){
         return new Comment(dto);
     }
@@ -62,18 +75,4 @@ public class Comment {
         return new CommentDto(comment);
     }
 
-    public static Comment createMember(CommentDto commentDto) {
-        Comment comment = Comment.builder()
-                .id(commentDto.getId())
-                .postid(commentDto.getPostid())
-                .author(commentDto.getAuthor())
-                .content(commentDto.getContent())
-                .lastEditedAt(commentDto.getLastEditedAt())
-                .createdAt(commentDto.getCreateAt())
-                .isSecret(commentDto.isSecret())
-                .likes(commentDto.getLikes())
-                .parent(commentDto.getParent())
-                .build();
-        return comment;
-    }
 }

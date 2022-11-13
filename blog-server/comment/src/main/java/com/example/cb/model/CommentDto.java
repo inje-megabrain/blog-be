@@ -12,9 +12,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class CommentDto {
-    @JsonProperty(value="id")
+    @JsonProperty(value="Id")
    private Long id;
-    @JsonProperty(value="postid")
+    @JsonProperty(value="PostId")
    private String postid;
     @JsonProperty(value="author")
    private String author;
