@@ -28,6 +28,8 @@
     "@": "./src"
   },
   "devDependencies": {
-    "eslint": "^8.26.0"
+    "eslint": "^8.26.0",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0"
   }
 }
