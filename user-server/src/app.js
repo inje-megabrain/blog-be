@@ -6,6 +6,7 @@ const session = require("express-session");
 
 const routers = require('@/api/v1/index');
 const passport = require('@/middleware/passport');
+const {swaggerUi, specs} = require('@/middleware/swagger');
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.use((req, res, next)=>{
   console.log(`${req.method} - ${req.url}`);
   next();
 })
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(routers);
 
