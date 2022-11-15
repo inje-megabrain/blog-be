@@ -10,11 +10,12 @@ import java.util.Date;
 @Getter
 @Builder
 @Entity
+@Table(name="blog")
 public class Blog {
 
     @Id
     @Column(name = "blog_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //글이름(글id)
     @Column(name = "owner")
