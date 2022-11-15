@@ -1,7 +1,7 @@
 'use strict';
 
 const swaggerUi = require('swagger-ui-express');
-const swaggereJsdoc = require('swagger-jsdoc');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
     swaggerDefinition: {
@@ -11,12 +11,12 @@ const options = {
             description: 'Test API with express',
         },
         host: 'localhost:3000',
-        basePath: '/'
+        basePath: '/api/v1'
     },
-    apis: ['../api/*.js', '../../swagger/*']
+    apis: ['./src/api/v1/**/*.js']
 };
 
-const specs = swaggereJsdoc(options);
+const specs = swaggerJsdoc(options);
 
 module.exports = {
     swaggerUi,
