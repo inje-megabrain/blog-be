@@ -6,6 +6,7 @@ import com.example.cb.model.BlogDto;
 import com.example.cb.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,14 +24,12 @@ public class CommentController {
 
     //블로그 생성
     @PostMapping(value = "/blog/")
-    public Blog add(@RequestBody BlogDto blogDto){
+    public ResponseEntity blogAdd(@RequestBody BlogDto blogDto){
         try{
-            if(blogDto.getTitle()=="")
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"제목은 작성하세요.");
-            return blogService.addBlog(blogDto);
+            blogService.addBlog(blogDto);
+            return new ResponseEntity(blogDto.getTitle()+"글이 작성 되었습니다.",HttpStatus.OK);
         }catch(Exception e){
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,"잘못된 요청",e);
+            return new ResponseEntity(("잘못된 요청"),HttpStatus.BAD_REQUEST);
         }
     }
 

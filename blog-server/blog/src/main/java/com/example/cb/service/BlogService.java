@@ -20,19 +20,21 @@ public class BlogService {
     public BlogService(BlogDao blogDao){
         this.blogDao = blogDao;
     }
-
     //블로그 생성
-    public Blog addBlog(BlogDto blogDto){
-        BlogDto dto = BlogDto.builder()
-                .id(blogDto.getId())
-                .owner(blogDto.getOwner())
-                .title(blogDto.getTitle())
-                .createAt(new Date(System.currentTimeMillis()))
-                .removeAt(blogDto.getRemoveAt())
-                .build();
-        return blogDao.save(Bolgfrom(dto));
-
-        
+    public Blog addBlog(BlogDto blogDto)throws Exception{
+        if(blogDto.getTitle()==""){
+            throw new Exception("제목을 입력하세요");
+        }
+        else{
+            BlogDto dto = BlogDto.builder()
+                    .id(blogDto.getId())
+                    .owner(blogDto.getOwner())
+                    .title(blogDto.getTitle())
+                    .createAt(new Date(System.currentTimeMillis()))
+                    .removeAt(blogDto.getRemoveAt())
+                    .build();
+            return blogDao.save(Bolgfrom(dto));
+        }
     }
 
     //블로그 수정
