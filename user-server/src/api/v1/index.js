@@ -1,9 +1,10 @@
 'use strict';
 
 const { Router } = require('express');
-const loginRouter = require('./login');
-const signupRouter = require('./signup');
-const userRouter = require('./user');
+const loginRouter = require('./login/index');
+const logoutRouter = require('./logout/index');
+const signupRouter = require('./signup/index');
+const userRouter = require('./user/index');
 
 const router = Router();
 
@@ -12,8 +13,9 @@ router.get('/', (req, res) => {
 	return res.send("<h1>Welcome to Api!</h1>");
 });
 
-router.use('/login', loginRouter);
-router.use('/signup', signupRouter);
-router.use('/user', userRouter);
+router.use('/api/v1/login', loginRouter);
+router.use('/api/v1/logout', logoutRouter);
+router.use('/api/v1/signup', signupRouter);
+router.use('/api/v1/user', userRouter);
 
 module.exports = router;

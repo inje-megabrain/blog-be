@@ -1,6 +1,6 @@
 'use strict';
 
-const db = require('@/models/index');
+const { UserModel } = require('@/models/user');
 
 /**
  * 유저와 관련된 서비스를 처리하는 클래스.
@@ -8,19 +8,19 @@ const db = require('@/models/index');
  */
 class UserService {
   /**
-   * 로그인 토큰을 발급합니다.
+   * 로그인이 유효한지 확인합니다.
    * @param {string} id 아이디
-   * @param {string} pw 비밀번호(raw)
-   * @returns {Promise<{token: string, session_id: string}>} 토큰
-   * @todo
+   * @param {string} rawPw 비밀번호
+   * @returns {Promise<UserModel|null>} 찾은 UserModel 또는 null
+   * @todo 비밀번호 암호화
    */
-  static async login(id, pw) {
-    throw new Error("구현되지 않았습니다.");
+  static async login(id, rawPw) {
+    return await UserModel.findOne({where: {id: id, password: rawPw}});
   }
 
   /**
    * 회원가입 합니다.
-   * @param {User} newUser 신규 회원 정보가 포함된 User 객체
+   * @param {{id: string, email: string, name: string, password: string}} newUser 신규 회원 정보가 포함된 User 객체
    * @returns {Promise<boolean>} 성공 여부
    * @todo
    */
@@ -59,18 +59,19 @@ class UserService {
 
   /**
    * 사용자 전체를 조회합니다.
-   * @returns {Promise<{id: string, name: string, email: string}[]>} 유저 DTO 배열
+   * @returns {Promise<Array<UserModel>>} 유저 DTO 배열
    */
   static async findAll() {
-    throw new Error("구현되지 않았습니다.");
+    return await UserModel.findAll();
   }
 
   /**
    * 사용자 정보를 가져옵니다.
    * @param {string} id
+   * @returns {Promise<UserModel>}
    */
   static async getInfo(id) {
-    throw new Error("구현되지 않았습니다.");
+    return await UserModel.findByPk(id);
   }
 
   /**

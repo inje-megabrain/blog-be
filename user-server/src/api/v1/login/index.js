@@ -1,16 +1,33 @@
 'use strict';
 
 const { Router } = require('express');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
-const UserService = require('@/services/UserService');
+const validators = require('@/middleware/validators');
 
 const router = Router();
 
-router.post('/', async (req, res) => {
-  let id = req.body.id;
-  let pw = req.body.password;
-  let result = await UserService.login(id, pw);
-	return res.send(result);
+router.post('/', ...validators.login, async (req, res) => {
+  passport.authenticate('local', (error, user, info) => {
+    if (error || !user) {
+      return res.status(400).json({reason: info.message});
+    }
+
+    req.login(user, (error) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).json({reason: info.message});
+      }
+    })
+
+    const token = jwt.sign(
+      {id: user.id},
+      process.env.JWT_SECRET_KEY,
+      {expiresIn: '10m'});
+
+    return res.status(200).json({token});
+  })(req, res);
 });
 
 module.exports = router;
