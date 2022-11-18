@@ -54,7 +54,7 @@ router.post('/', ...validators.login, async (req, res) => {
       process.env.JWT_SECRET_KEY,
       {expiresIn: '10m'});
 
-    return res.status(200).json({token});
+    return res.status(200).cookie('jwt-token', token, {maxAge: 10*60*1000});
   })(req, res);
 });
 

@@ -20,6 +20,7 @@ const router = Router();
 router.get('/', async (req, res) => {
   req.logout();
   req.session.destroy();
+  res.clearCookie('jwt-token');
   res.redirect('/');
 });
 
