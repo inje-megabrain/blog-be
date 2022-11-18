@@ -3,6 +3,7 @@
 const { Router } = require('express');
 
 const UserService = require('@/services/UserService');
+const validators = require('@/middleware/validators');
 
 const router = Router();
 
@@ -33,7 +34,7 @@ const router = Router();
  *       400:
  *        description: ID 찾기 실패
  */
-router.get('/', async (req, res) => {
+router.get('/', ...validators.findId, async (req, res) => {
   let email = req.body.email;
   let user = req.body.user;
   let result = await UserService.findId(email, user);

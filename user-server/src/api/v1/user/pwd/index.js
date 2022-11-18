@@ -3,6 +3,7 @@
 const { Router } = require('express');
 
 const UserService = require('@/services/UserService');
+const validators = require('@/middleware/validators');
 
 const router = Router();
 
@@ -34,7 +35,7 @@ const router = Router();
  *       400:
  *        description: PW 변경 실패
  */
-router.post('/', async (req, res) => {
+router.post('/', ...validators.changePassword, async (req, res) => {
   let id = req.body.id;
   let pw = req.body.password;
   let result = await UserService.changePassword(id, pw);

@@ -4,6 +4,8 @@ const { Router } = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
+const validators = require('@/middleware/validators');
+
 const router = Router();
 
 
@@ -34,7 +36,7 @@ const router = Router();
  *       400:
  *        description: 로그인 실패
  */
-router.post('/', async (req, res) => {
+router.post('/', ...validators.login, async (req, res) => {
   passport.authenticate('local', (error, user, info) => {
     if (error || !user) {
       return res.status(400).json({reason: info.message});
@@ -48,7 +50,7 @@ router.post('/', async (req, res) => {
     })
 
     const token = jwt.sign(
-      {id: user.id, name: user.name, auth: user.auth},
+      {id: user.id},
       process.env.JWT_SECRET_KEY,
       {expiresIn: '10m'});
 

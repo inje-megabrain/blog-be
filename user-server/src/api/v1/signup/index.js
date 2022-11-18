@@ -3,6 +3,7 @@
 const { Router } = require('express');
 
 const UserService = require('@/services/UserService');
+const validators = require('@/middleware/validators');
 
 const router = Router();
 
@@ -39,7 +40,7 @@ const router = Router();
  *       400:
  *        description: 회원가입 실패
  */
-router.post('/', async (req, res) => {
+router.post('/', ...validators.signup, async (req, res) => {
   let result = UserService.signup({
     id: req.body.id,
     email: req.body.email,
