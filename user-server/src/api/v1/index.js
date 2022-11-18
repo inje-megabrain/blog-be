@@ -8,7 +8,19 @@ const userRouter = require('./user/index');
 
 const router = Router();
 
-// API 진입점
+/**
+ * @swagger
+ *  /:
+ *    get:
+ *      tags:
+ *      - Index
+ *      description: 웰컴 페이지
+ *      produces:
+ *      - application/json
+ *      responses:
+ *       200:
+ *        description: 테스트 성공
+ */
 router.get('/', (req, res) => {
 	return res.send("<h1>Welcome to Api!</h1>");
 });
