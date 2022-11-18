@@ -1,28 +1,19 @@
-package com.example.cb.Entity;
+package com.example.cb.DTO;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.redis.core.RedisHash;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Getter
-@Entity
-@Setter
-@RedisHash(value = "follower", timeToLive = 30)
-public class Follows {
+public class FollowsDto{
 
-    @org.springframework.data.annotation.Id
-    @Id
-    @Column(name = "follow_from")
+
+
+
     private String followFrom;
-    
-    @Column(name = "follow_to")
+
     private String followTo;
 
-    @Column(name = "follow_time")
     private String followTime;
 
     public String getFollowTime() {

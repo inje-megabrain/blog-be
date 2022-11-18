@@ -30,6 +30,6 @@ public class PostController {
     }
     @GetMapping("/delete/{postAuthor}") //삭제 기능
     public String delete(@PathVariable String postAuthor, HttpServletResponse response){
-        return postService.delete(postAuthor);
+        return "";
     }
 }
